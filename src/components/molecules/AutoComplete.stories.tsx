@@ -8,7 +8,7 @@ interface IAutoCompleteProps {
   textArray: string[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   maxListLength?: number;
-  styleProps?: IStyleProps;
+  addStyle?: string;
 }
 
 const meta: Meta = {
@@ -52,13 +52,13 @@ const meta: Meta = {
         type: "number",
       },
     },
-    styleProps: {
+    addStyle: {
       description: "스타일 프로퍼티",
       defaultValue: {
-        summary: "{}",
+        summary: "",
       },
       control: {
-        type: "object",
+        type: "string",
       },
     },
   },
@@ -89,9 +89,8 @@ CustomStyleAutoComplete.args = {
   textArray: ["Apple", "Banana", "Cherry", "Date", "Elderberry"],
   onChange: (e) => (value = e.target.value),
   maxListLength: 5,
-  styleProps: {
-    margin: "15px",
-    border: "1px solid gray",
-    activeColor: "lightgray",
-  },
+  addStyle: `margin: 15px,
+  border: 1px solid gray",
+  activeColor: lightgray,
+  `,
 };

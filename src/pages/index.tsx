@@ -9,7 +9,7 @@ import {
 import { ThemeContext } from "../contexts/ThemeContext";
 import AutoComplete from "@/components/molecules/AutoComplete";
 import { JobType, MajorType, experienceLevels } from "@/lib/categories";
-
+import ChipGroup from "@/components/molecules/ChipGroup";
 const HomePage = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state: any) => state.categories);
@@ -20,25 +20,38 @@ const HomePage = () => {
 
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [value, setValue] = React.useState("");
+  const [selectedValue, setSelectedValue] = React.useState("");
+  const [chipList, setChipList] = React.useState<string[]>([]);
   const categoryExists = useSelector(selectCategoryExists(value));
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
+  const onSelectedValue = (value: string) => {
+    setSelectedValue(value);
+  };
+
   useEffect(() => {
-    console.log(categoryExists);
-  }, [value]);
+    if (categoryExists) {
+      const newChipList = new Set([...chipList, selectedValue]);
+      setChipList(Array.from(newChipList));
+      setValue("");
+    }
+  }, [selectedValue]);
 
   return (
     <MainContainer>
+      <ChipGroup textArray={chipList} onSelectedValue={onSelectedValue} />
       <AutoComplete
         value={value}
         onChange={onChange}
+        onSelectedValue={onSelectedValue}
         placeholder={"직무, 연차를 입력해주세요"}
         textArray={categories}
-        styleProps={{
-          border: "1px solid gray",
-        }}
+        addStyle={`
+          border: 1px solid gray;
+        `}
       />
     </MainContainer>
   );
