@@ -1,6 +1,4 @@
-const test = "";
 export const JobType = [
-  "",
   "기획",
   "전략",
   "경영",
@@ -323,7 +321,6 @@ export const JobType = [
   "방재기사",
 ];
 export const MajorType = [
-  "",
   "어문학",
   "국어국문학과",
   "독일어과",

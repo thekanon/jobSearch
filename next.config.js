@@ -1,14 +1,15 @@
 /** @type {import('next').NextConfig} */
-const path = require('path')
+const path = require("path");
 const nextConfig = {
   alias: {
-    '/@/': path.resolve(__dirname, './src'),
-    '/@components/': path.resolve(__dirname, './src/components'),
-    '/@pages/': path.resolve(__dirname, './src/pages'),
-    '/@types/': path.resolve(__dirname, './src/types'),
-    '/@styles/': path.resolve(__dirname, './src/styles'),
-    '/@lib/': path.resolve(__dirname, './src/lib'),
+    "/@/": path.resolve(__dirname, "./src"),
+    "/@/components/": path.resolve(__dirname, "./src/components"),
+    "/@/pages/": path.resolve(__dirname, "./src/pages"),
+    "/@/types/": path.resolve(__dirname, "./src/types"),
+    "/@/styles/": path.resolve(__dirname, "./src/styles"),
+    "/@/lib/": path.resolve(__dirname, "./src/lib"),
+    "/@/store/": path.resolve(__dirname, "./src/store"),
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

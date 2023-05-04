@@ -1,16 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  setCategories,
+  selectCategoryExists,
+} from "@/store/reducers/categories";
 import { ThemeContext } from "../contexts/ThemeContext";
 import AutoComplete from "@/components/molecules/AutoComplete";
 import { JobType, MajorType, experienceLevels } from "@/lib/categories";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const categories = useSelector((state: any) => state.categories);
+
+  useEffect(() => {
+    dispatch(setCategories([...JobType, ...MajorType, ...experienceLevels]));
+  }, []);
+
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [value, setValue] = React.useState("");
+  const categoryExists = useSelector(selectCategoryExists(value));
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setValue(e.target.value);
   };
+
+  useEffect(() => {
+    console.log(categoryExists);
+  }, [value]);
 
   return (
     <MainContainer>
@@ -18,7 +35,7 @@ const HomePage = () => {
         value={value}
         onChange={onChange}
         placeholder={"직무, 연차를 입력해주세요"}
-        textArray={[...JobType, ...MajorType, ...experienceLevels]}
+        textArray={categories}
         styleProps={{
           border: "1px solid gray",
         }}

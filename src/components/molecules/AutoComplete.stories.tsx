@@ -1,5 +1,5 @@
 import type { Meta, Story } from "@storybook/react";
-import AutoComplete from "../../components/molecules/AutoComplete";
+import AutoComplete from "./AutoComplete";
 import { IStyleProps } from "@/types/components/defaultProps";
 
 interface IAutoCompleteProps {
