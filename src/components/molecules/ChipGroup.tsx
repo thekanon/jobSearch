@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import Chip from "../atoms/Chip";
 import { IStyleProps } from "@/types/components/defaultProps";
 
@@ -15,6 +15,7 @@ const ChipGroup = ({
   addStyle = "",
 }: IChipGroupProps) => {
   const [selectedValue, setSelectedValue] = useState("");
+  const theme = useTheme();
 
   useEffect(() => {
     if (onSelectedValue) onSelectedValue(selectedValue);
@@ -28,7 +29,7 @@ const ChipGroup = ({
           onClick={() => {
             setSelectedValue(item);
           }}
-          addStyle={`margin: "0.5rem 0.5rem 0 0",`}
+          addStyle={StyledChip(theme)}
         >
           {item}
         </Chip>
@@ -46,4 +47,12 @@ const ChipGroupWrapper = styled.div<IStyleProps>`
   }
   ${({ addStyle }) => addStyle}
 `;
+const StyledChip = (theme: any) => `
+  margin: 0.3rem 0.3rem 0 0;
+  &:hover {
+    background-color: ${theme.text + 70};
+    color: ${theme.body};
+  }
+`;
+
 export default ChipGroup;

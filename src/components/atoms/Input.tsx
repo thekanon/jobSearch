@@ -19,6 +19,11 @@ const Input = ({
 };
 
 const StyledInput = styled.input<IDefaultAtomsComponentProps>`
+  padding: 1em;
+  font-size: 1em;
+  background-color: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
+  border: 1px solid gray;
   ${({ addStyle }) => addStyle}
 `;
 export default Input;
