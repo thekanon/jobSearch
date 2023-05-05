@@ -478,7 +478,7 @@ export const MajorType = [
 ];
 
 export const experienceLevels = [
-  "신입",
+  "신입(0년차)",
   "경력",
   "인턴",
   "계약직",

@@ -15,7 +15,7 @@ const HomePage = () => {
   const categories = useSelector((state: any) => state.categories);
 
   useEffect(() => {
-    dispatch(setCategories([...JobType, ...MajorType, ...experienceLevels]));
+    dispatch(setCategories([JobType, MajorType, experienceLevels]));
   }, []);
 
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -42,7 +42,13 @@ const HomePage = () => {
 
   return (
     <MainContainer>
-      <ChipGroup textArray={chipList} onSelectedValue={onSelectedValue} />
+      <ChipGroup
+        textArray={chipList}
+        onSelectedValue={onSelectedValue}
+        addStyle={`
+        margin-bottom: 20px;
+      `}
+      />
       <AutoComplete
         value={value}
         onChange={onChange}
