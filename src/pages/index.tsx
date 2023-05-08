@@ -3,19 +3,22 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
+  selectCategory,
   setCategories,
   selectCategoryExists,
+  setCategoryKey,
 } from "@/store/reducers/categories";
 import { ThemeContext } from "../contexts/ThemeContext";
 import AutoComplete from "@/components/molecules/AutoComplete";
-import { JobType, MajorType, experienceLevels } from "@/lib/categories";
+import { categoryObj } from "@/lib/categories";
 import ChipGroup from "@/components/molecules/ChipGroup";
 const HomePage = () => {
   const dispatch = useDispatch();
-  const categories = useSelector((state: any) => state.categories);
+  const category = useSelector(selectCategory);
+  const categories = useSelector((state: any) => state.categories.categoryObj);
 
   useEffect(() => {
-    dispatch(setCategories([JobType, MajorType, experienceLevels]));
+    dispatch(setCategories(categoryObj));
   }, []);
 
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -40,6 +43,20 @@ const HomePage = () => {
     }
   }, [selectedValue]);
 
+  useEffect(() => {
+    const categoryKeys = Object.keys(categories);
+    const resultKeys = chipList.flatMap((value) =>
+      categoryKeys.filter((key) => categories[key].includes(value))
+    );
+
+    const result = categoryKeys.filter((key) => !resultKeys.includes(key));
+
+    if (result.length > 0) {
+      console.log("result", result);
+      dispatch(setCategoryKey(result[0]));
+    }
+  }, [chipList]);
+
   return (
     <MainContainer>
       <ChipGroup
@@ -53,8 +70,8 @@ const HomePage = () => {
         value={value}
         onChange={onChange}
         onSelectedValue={onSelectedValue}
-        placeholder={"직무, 연차를 입력해주세요"}
-        textArray={categories}
+        placeholder={categories}
+        textArray={category !== undefined ? category : []}
         addStyle={`
           border: 1px solid gray;
         `}

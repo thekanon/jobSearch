@@ -2,24 +2,39 @@ import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const categoriesSlice = createSlice({
   name: "categories",
-  initialState: [],
+  // JobType, MajorType, experienceLevels
+  initialState: {
+    categoryObj: {},
+    categoryKey: "JobType",
+  },
   reducers: {
-    getCategories: (state) => state,
-    setCategories: (state, action) => action.payload,
+    setCategories: (state, action) => {
+      state.categoryObj = action.payload;
+    },
+    setCategoryKey: (state, action) => {
+      state.categoryKey = action.payload;
+    },
   },
 });
-
-// state.categories를 선택하는 selector
-const selectCategories = (state: any) => state.categories;
+const selectCategories = (state: any) => state;
+// 특정 카테고리를 선택하는 selector
+const selectCategory = (state: any) => {
+  return state.categories.categoryObj[state.categories.categoryKey];
+};
 
 // 특정 카테고리가 categories 배열에 있는지 확인하는 selector
 const selectCategoryExists = (category: any) =>
-  createSelector(selectCategories, (categories) =>
-    categories.includes(category)
-  );
+  createSelector(selectCategories, (state) => {
+    if (state?.categories?.categoryObj === undefined) return false;
+    return (
+      state?.categories?.categoryObj[state.categories?.categoryKey]?.filter(
+        (item: any) => item.includes(category)
+      ).length > 0
+    );
+  });
 
-export const { getCategories, setCategories } = categoriesSlice.actions;
+export const { setCategoryKey, setCategories } = categoriesSlice.actions;
 
-export { selectCategories, selectCategoryExists };
+export { selectCategory, selectCategories, selectCategoryExists };
 
 export default categoriesSlice.reducer;
