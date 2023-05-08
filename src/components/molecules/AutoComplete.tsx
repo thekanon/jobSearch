@@ -27,7 +27,12 @@ const AutoComplete = ({
 }: IAutoCompleteProps) => {
   const [selectedValue, setSelectedValue] = useState("");
   const filter = (text: string) => {
-    if (text === "") return [];
+    // 빈값이면 랜덤으로 추천
+    const randomStart = Math.floor(
+      Math.random() * Math.max(0, textArray.length - maxListLength)
+    );
+    if (text === "")
+      return textArray.slice(randomStart, randomStart + maxListLength);
     const result = textArray.filter((item) => item.includes(text));
     if (selectedValue === result[0]) return [];
     if (result.length > maxListLength) return result.slice(0, maxListLength);
@@ -59,7 +64,7 @@ const AutoComplete = ({
                   target: { value: item },
                 } as React.ChangeEvent<HTMLInputElement>);
               }}
-              key={item}
+              key={item || Math.random()}
             >
               {item}
             </div>
