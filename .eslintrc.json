@@ -3,5 +3,6 @@
     "next/core-web-vitals",
     "next/babel",
     "plugin:storybook/recommended"
-  ]
+  ],
+  
 }
