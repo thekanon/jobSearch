@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 
 import useDebounce from "@/hooks/useDebounce";
 
 import Input from "../atoms/Input";
-import { IStyleProps } from "@/types/components/defaultProps";
 
 interface IAutoCompleteProps {
   value: string;
@@ -33,12 +32,22 @@ const AutoComplete = ({
   const [filterList, setFilterList] = useState<string[]>([]);
   const debouncedSearchTerm = useDebounce(searchTerm, 200);
 
+  const selectItem = useCallback((item) => {
+    setSelectedValue(item);
+    setSearchTerm("");
+  }, []);
+
   const filter = (text: string) => {
-    // 빈값이면 랜덤으로 추천
+    const lowerCaseText = text.toLowerCase();
+
     const randomStart = Math.floor(
       Math.random() * Math.max(0, textArray.length - maxListLength)
     );
-    const result = textArray.filter((item) => item.includes(text));
+
+    const result = textArray.filter((item) =>
+      item.toLowerCase().includes(lowerCaseText)
+    );
+
     if (text === "" || selectedValue === result[0])
       return textArray.slice(randomStart, randomStart + maxListLength);
 
@@ -74,14 +83,11 @@ const AutoComplete = ({
       />
       {filterList.length !== 0 && (
         <AutoCompleteList addStyle={addStyle}>
-          {filterList.map((item) => (
+          {filterList.map((item, index) => (
             <div
               className={selectedValue === item ? "active" : ""}
-              onClick={() => {
-                setSelectedValue(item);
-                setSearchTerm("");
-              }}
-              key={item || Math.random()}
+              onClick={() => selectItem(item)}
+              key={index}
             >
               {item}
             </div>
@@ -101,8 +107,10 @@ const AutoCompleteList = styled.div<IAutoCompleteListProps>`
   overflow: auto;
   div {
     padding: 10px;
+    cursor: pointer;
   }
-  div.active {
+  div.active,
+  div:hover {
     background-color: gray;
   }
   ${({ addStyle }) => addStyle}
