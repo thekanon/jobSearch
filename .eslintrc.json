@@ -1,8 +1,21 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "next/babel",
-    "plugin:storybook/recommended"
-  ],
-  
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "styled-components-a11y"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "no-useless-escape": 0,
+    "no-debugger": "warn",
+    "react-hooks/exhaustive-deps": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "plugin:styled-components-a11y/recommended": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  }
 }

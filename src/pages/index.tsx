@@ -7,6 +7,7 @@ import {
   setCategories,
   selectCategoryExists,
   setCategoryKey,
+  selectCategoryKey,
 } from "@/store/reducers/categories";
 import { ThemeContext } from "../contexts/ThemeContext";
 import AutoComplete from "@/components/molecules/AutoComplete";
@@ -16,12 +17,11 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const category = useSelector(selectCategory);
   const categories = useSelector((state: any) => state.categories.categoryObj);
+  const categoryKey = useSelector(selectCategoryKey);
 
   useEffect(() => {
     dispatch(setCategories(categoryObj));
   }, []);
-
-  const { theme, toggleTheme } = useContext(ThemeContext);
   const [value, setValue] = React.useState("");
   const [selectedValue, setSelectedValue] = React.useState("");
   const [chipList, setChipList] = React.useState<string[]>([]);
@@ -57,6 +57,14 @@ const HomePage = () => {
     }
   }, [chipList]);
 
+  const getPlaceholder = () => {
+    if (!categoryKey) return "";
+    // JobType, MajorType, experienceLevels
+    else if (categoryKey === "JobType") return "직무를 입력해주세요";
+    else if (categoryKey === "experienceLevels") return "경력을 입력해주세요";
+    else if (categoryKey === "MajorType") return "전공을 입력해주세요";
+  };
+
   return (
     <MainContainer>
       <ChipGroup
@@ -70,7 +78,7 @@ const HomePage = () => {
         value={value}
         onChange={onChange}
         onSelectedValue={onSelectedValue}
-        placeholder={categories}
+        placeholder={getPlaceholder()}
         textArray={category !== undefined ? category : []}
         addStyle={`
           border: 1px solid gray;

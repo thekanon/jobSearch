@@ -22,7 +22,7 @@ const AutoComplete = ({
   textArray = [],
   onChange,
   onSelectedValue,
-  maxListLength = 10,
+  maxListLength = 99,
   addStyle = "",
 }: IAutoCompleteProps) => {
   const [selectedValue, setSelectedValue] = useState("");
@@ -38,6 +38,9 @@ const AutoComplete = ({
     if (result.length > maxListLength) return result.slice(0, maxListLength);
     return result;
   };
+  useEffect(() => {
+    console.log(placeholder);
+  }, [placeholder]);
 
   useEffect(() => {
     if (onSelectedValue) onSelectedValue(selectedValue);
@@ -80,6 +83,8 @@ const AutoCompleteList = styled.div<IAutoCompleteListProps>`
   margin: 10px 0 0 0;
   padding: 10px;
   border: none;
+  max-height: 350px;
+  overflow: auto;
   div {
     padding: 10px;
   }

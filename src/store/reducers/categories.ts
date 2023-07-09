@@ -21,6 +21,7 @@ const selectCategories = (state: any) => state;
 const selectCategory = (state: any) => {
   return state.categories.categoryObj[state.categories.categoryKey];
 };
+const selectCategoryKey = (state: any) => state.categories.categoryKey;
 
 // 특정 카테고리가 categories 배열에 있는지 확인하는 selector
 const selectCategoryExists = (category: any) =>
@@ -35,6 +36,11 @@ const selectCategoryExists = (category: any) =>
 
 export const { setCategoryKey, setCategories } = categoriesSlice.actions;
 
-export { selectCategory, selectCategories, selectCategoryExists };
+export {
+  selectCategory,
+  selectCategories,
+  selectCategoryExists,
+  selectCategoryKey,
+};
 
 export default categoriesSlice.reducer;

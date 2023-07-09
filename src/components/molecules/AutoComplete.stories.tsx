@@ -1,6 +1,5 @@
 import type { Meta, Story } from "@storybook/react";
 import AutoComplete from "./AutoComplete";
-import { IStyleProps } from "@/types/components/defaultProps";
 
 interface IAutoCompleteProps {
   value: string;
@@ -71,7 +70,7 @@ const Template: Story<IAutoCompleteProps> = (args) => (
 );
 
 let value = "";
-let value2 = "";
+let value2;
 
 export const DefaultAutoComplete = Template.bind({});
 DefaultAutoComplete.args = {
