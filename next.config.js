@@ -12,6 +12,7 @@ module.exports = {
       "/@/styles/": path.resolve(__dirname, "./src/styles"),
       "/@/lib/": path.resolve(__dirname, "./src/lib"),
       "/@/store/": path.resolve(__dirname, "./src/store"),
+      "/@/hooks/": path.resolve(__dirname, "./src/hooks"),
     };
     config.module.rules.push({
       test: /\.svg$/,

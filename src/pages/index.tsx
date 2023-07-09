@@ -9,6 +9,7 @@ import {
   setCategoryKey,
   selectCategoryKey,
 } from "@/store/reducers/categories";
+import { addItem, removeItem } from "@/store/reducers/selectChip";
 import { ThemeContext } from "../contexts/ThemeContext";
 import AutoComplete from "@/components/molecules/AutoComplete";
 import { categoryObj } from "@/lib/categories";
@@ -24,22 +25,26 @@ const HomePage = () => {
   }, []);
   const [value, setValue] = React.useState("");
   const [selectedValue, setSelectedValue] = React.useState("");
-  const [chipList, setChipList] = React.useState<string[]>([]);
+  const chipList = useSelector((state: any) => state.selectChip);
   const categoryExists = useSelector(selectCategoryExists(value));
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e) return;
     setValue(e.target.value);
   };
 
   const onSelectedValue = (value: string) => {
     setSelectedValue(value);
   };
+  const onClickChip = (value: string) => {
+    dispatch(removeItem(value));
+  };
 
   useEffect(() => {
     if (categoryExists) {
-      const newChipList = new Set([...chipList, selectedValue]);
-      setChipList(Array.from(newChipList));
       setValue("");
+      dispatch(addItem(selectedValue));
+      console.log(chipList);
     }
   }, [selectedValue]);
 
@@ -52,9 +57,10 @@ const HomePage = () => {
     const result = categoryKeys.filter((key) => !resultKeys.includes(key));
 
     if (result.length > 0) {
-      console.log("result", result);
       dispatch(setCategoryKey(result[0]));
+      setValue("");
     }
+    console.log(result[0]);
   }, [chipList]);
 
   const getPlaceholder = () => {
@@ -69,7 +75,7 @@ const HomePage = () => {
     <MainContainer>
       <ChipGroup
         textArray={chipList}
-        onSelectedValue={onSelectedValue}
+        onSelectedValue={onClickChip}
         addStyle={`
         margin-bottom: 20px;
       `}
