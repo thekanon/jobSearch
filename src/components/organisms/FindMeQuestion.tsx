@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import styled, { keyframes, css } from 'styled-components';
-import _textTitle from '../atoms/_textTitle';
-import ButtonGroup from 'components/molecules/ButtonGroup';
-import _blank from '../atoms/_blank';
-import _timePicker from '../atoms/input/_timePicker';
+import React, { useEffect, useState, useRef } from "react";
+import styled, { keyframes, css } from "styled-components";
+import _textTitle from "../atoms/_textTitle";
+import ButtonGroup from "../molecules/ButtonGroup";
+import _blank from "../atoms/_blank";
+import _timePicker from "../atoms/input/_timePicker";
 
-import { mediumCategoriesProps } from '../../lib/types/findme';
+import { mediumCategoriesProps } from "../../lib/types/findme";
 
 interface FindMeQuestionProps {
   question: mediumCategoriesProps;
@@ -14,8 +14,13 @@ interface FindMeQuestionProps {
   initUserAnswer?: Object;
   questionState?: {
     code: string;
-    state: 'current' | 'checked' | 'unchecked' | 'disabled';
+    state: "current" | "checked" | "unchecked" | "disabled";
   }[];
+}
+interface QuestionWrapperProps {
+  highlighted?: boolean;
+  disabled?: boolean;
+  color?: string;
 }
 
 const FindMeQuestion = ({
@@ -38,13 +43,16 @@ const FindMeQuestion = ({
 
   useEffect(() => {
     questionComponent(question);
-    const currentQuestionState = questionState.findIndex((e) => e.state === 'current');
+    const currentQuestionState = questionState.findIndex(
+      (e) => e.state === "current"
+    );
     if (currentQuestionState && currentQuestionState !== -1) {
-      const questionRefsCurrent = questionRefs.current[questionState[currentQuestionState]?.code];
+      const questionRefsCurrent =
+        questionRefs.current[questionState[currentQuestionState]?.code];
       if (questionRefsCurrent) {
         questionRefsCurrent.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
+          behavior: "smooth",
+          block: "center",
         });
       }
     } else {
@@ -54,8 +62,8 @@ const FindMeQuestion = ({
           if (Object.values(questionRefs.current)[i]) {
             currentEl = Object.values(questionRefs.current)[i] as any;
             currentEl.scrollIntoView({
-              behavior: 'smooth',
-              block: 'end',
+              behavior: "smooth",
+              block: "end",
             });
             break;
           }
@@ -85,21 +93,21 @@ const FindMeQuestion = ({
     calculateScore(e.currentTarget.name);
   };
   const onChangeTime = (e) => {
-    const value = e.split(':');
+    const value = e.split(":");
     if (value[1] < 10) {
-      value[1] = '0' + value[1];
+      value[1] = "0" + value[1];
     }
     if (value[2] < 10) {
-      value[2] = '0' + value[2];
+      value[2] = "0" + value[2];
     }
     setUserAnswerList((prevState) => ({
       ...prevState,
-      [value[0]]: value[0] + '_' + value[1] + ':' + value[2],
+      [value[0]]: value[0] + "_" + value[1] + ":" + value[2],
     }));
   };
 
   const calculateScore = (value) => {
-    const calc = value.split('_');
+    const calc = value.split("_");
     const searchRow = question.questionList.find((q) => q.code === calc[0]); // 질문
     const scoreRange = [searchRow.minScore, searchRow.maxScore];
 
@@ -118,10 +126,10 @@ const FindMeQuestion = ({
     const questionList = question.questionList;
 
     for (let i = 0; i < question.questionList.length; i++) {
-      if (questionList[i].id === '지시문') {
+      if (questionList[i].id === "지시문") {
         questionArray.push(
           <_textTitle
-            key={i + '_textTitle'}
+            key={i + "_textTitle"}
             text={questionList[i].description}
             color={color}
             size="1em"
@@ -130,38 +138,42 @@ const FindMeQuestion = ({
             styleProp="margin:1em 0 1em 0;"
           />
         );
-      } else if (questionList[i].answerType === 'input') {
-        const text = questionList[i].id + '. ' + questionList[i].description;
-        const hFlag = questionList[i].code === 'gsq04';
+      } else if (questionList[i].answerType === "input") {
+        const text = questionList[i].id + ". " + questionList[i].description;
+        const hFlag = questionList[i].code === "gsq04";
         const timeRemark = {
           gsq02: [
-            '0~23시로 표시해주십시오.',
-            ' 예) 밤 12시 → 0시, 오후2시 → 14시',
-            '교대 근무자는 밤에 주무시는 때를 기준으로 대답해 주십시오.',
+            "0~23시로 표시해주십시오.",
+            " 예) 밤 12시 → 0시, 오후2시 → 14시",
+            "교대 근무자는 밤에 주무시는 때를 기준으로 대답해 주십시오.",
           ],
           gsq03: [
-            '0~23시로 표시해주십시오.',
-            '예) 밤 12시 → 0시, 오후2시 → 14시',
-            '교대 근무자는 밤에 주무시고 아침에 일어날 때를 기준으로 대답해 주십시오.',
+            "0~23시로 표시해주십시오.",
+            "예) 밤 12시 → 0시, 오후2시 → 14시",
+            "교대 근무자는 밤에 주무시고 아침에 일어날 때를 기준으로 대답해 주십시오.",
           ],
-          gsq04: ['실제 수면시간은 잠자리에 누워 있는 시간과는 다를 수 있음을 유의하십시오.'],
+          gsq04: [
+            "실제 수면시간은 잠자리에 누워 있는 시간과는 다를 수 있음을 유의하십시오.",
+          ],
         };
         questionArray.push(
           <QuestionWrapper
             className="questionWrapper"
-            key={i + '_questionWrapper'}
+            key={i + "_questionWrapper"}
             ref={(el) => (questionRefs.current[questionList[i].code] = el)}
             highlighted={
               questionState &&
-              questionState.find((q) => q.code === questionList[i].code)?.state === 'current'
+              questionState.find((q) => q.code === questionList[i].code)
+                ?.state === "current"
             }
             disabled={
-              questionState.find((q) => q.code === questionList[i].code)?.state === 'disabled'
+              questionState.find((q) => q.code === questionList[i].code)
+                ?.state === "disabled"
             }
             color={color}
           >
             <_textTitle
-              key={i + '_textTitle'}
+              key={i + "_textTitle"}
               text={text}
               size="1.05em"
               bold={false}
@@ -169,14 +181,14 @@ const FindMeQuestion = ({
             />
             <TimeRemarkWrapper>
               <_textTitle
-                key={i + '_textTitle_1'}
+                key={i + "_textTitle_1"}
                 text={timeRemark[questionList[i].code][0]}
                 size="0.9em"
                 bold={false}
                 styleProp="margin:0 0 0 0;"
               />
               <_textTitle
-                key={i + '_textTitle_2'}
+                key={i + "_textTitle_2"}
                 text={timeRemark[questionList[i].code][1]}
                 size="0.9em"
                 color="#8C8C8C"
@@ -184,7 +196,7 @@ const FindMeQuestion = ({
                 styleProp="margin:0 0 0 0;"
               />
               <_textTitle
-                key={i + '_textTitle_3'}
+                key={i + "_textTitle_3"}
                 text={timeRemark[questionList[i].code][2]}
                 size="0.9em"
                 bold={false}
@@ -193,7 +205,7 @@ const FindMeQuestion = ({
             </TimeRemarkWrapper>
             <_timePicker
               color={color}
-              key={i + '_timePicker'}
+              key={i + "_timePicker"}
               name={questionList[i].code}
               value={userAnswerList[questionList[i].code]}
               onTimeChange={onChangeTime}
@@ -201,9 +213,9 @@ const FindMeQuestion = ({
             />
           </QuestionWrapper>
         );
-        questionArray.push(<_blank key={i + '_blank'} height={30} />);
+        questionArray.push(<_blank key={i + "_blank"} height={30} />);
       } else {
-        const text = questionList[i].id + '. ' + questionList[i].description;
+        const text = questionList[i].id + ". " + questionList[i].description;
         const answerOptions = questionList[i].answerOptions.slice();
         if (questionList[i].reverse) {
           answerOptions.reverse();
@@ -212,19 +224,21 @@ const FindMeQuestion = ({
         questionArray.push(
           <QuestionWrapper
             className="questionWrapper"
-            key={i + '_questionWrapper'}
+            key={i + "_questionWrapper"}
             ref={(el) => (questionRefs.current[questionList[i].code] = el)}
             highlighted={
               questionState &&
-              questionState.find((q) => q.code === questionList[i].code)?.state === 'current'
+              questionState.find((q) => q.code === questionList[i].code)
+                ?.state === "current"
             }
             disabled={
-              questionState.find((q) => q.code === questionList[i].code)?.state === 'disabled'
+              questionState.find((q) => q.code === questionList[i].code)
+                ?.state === "disabled"
             }
             color={color}
           >
             <_textTitle
-              key={i + '_textTitle'}
+              key={i + "_textTitle"}
               text={text}
               size="1.05em"
               bold={false}
@@ -232,10 +246,11 @@ const FindMeQuestion = ({
             />
             <ButtonGroup
               checkIcon={true}
-              key={i + '_buttonGroup'}
+              key={i + "_buttonGroup"}
               buttonList={answerOptions}
               uniqueKeyList={answerOptions.map(
-                (answer, index) => questionList[i].code + '_' + answer + '_' + index
+                (answer, index) =>
+                  questionList[i].code + "_" + answer + "_" + index
               )}
               color={color}
               currentTextFlag={true}
@@ -243,7 +258,8 @@ const FindMeQuestion = ({
               vertical={answerOptions.length > 2}
               disabledButtonList={
                 questionState &&
-                questionState.find((q) => q.code === questionList[i].code)?.state === 'disabled'
+                questionState.find((q) => q.code === questionList[i].code)
+                  ?.state === "disabled"
                   ? answerOptions.map((e) => true)
                   : []
               }
@@ -251,7 +267,7 @@ const FindMeQuestion = ({
             />
           </QuestionWrapper>
         );
-        questionArray.push(<_blank key={i + '_blank'} height={30} />);
+        questionArray.push(<_blank key={i + "_blank"} height={30} />);
       }
     }
     setQuestionArray(questionArray);
@@ -279,9 +295,10 @@ const TimeRemarkWrapper = styled.div`
   border-radius: 4px;
 `;
 
-const QuestionWrapper = styled.div`
+const QuestionWrapper = styled.div<QuestionWrapperProps>`
   margin: 0 1em 1em 1em;
-  background-color: ${({ highlighted, color }) => (highlighted ? `${color}66` : 'transparent')};
+  background-color: ${({ highlighted, color }) =>
+    highlighted ? `${color}66` : "transparent"};
 
   transition: background-color 0.3s ease-in-out;
   ${({ highlighted, color }) =>

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
-import _button from '../atoms/_button';
+import React, { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
+import _button from "../atoms/_button";
 
 interface buttonGroupProps {
   buttonList: string[];
@@ -18,6 +18,10 @@ interface buttonGroupProps {
   currentTextFlag?: boolean;
   hoverColorList?: HoverColorProps[];
 }
+interface ButtonGroupWrapperProps {
+  vertical?: boolean;
+}
+
 interface HoverColorProps {
   backgroundColor: string;
   textColor: string;
@@ -43,11 +47,13 @@ const ButtonGroup: React.FC<buttonGroupProps> = ({
   if (buttonList.length === 2) {
     // debugger;
   }
-  const [currentMultipleChoiceState, setCurrentMultipleChoiceState] = useState([]);
+  const [currentMultipleChoiceState, setCurrentMultipleChoiceState] = useState(
+    []
+  );
 
   const nameList = uniqueKeyList
     ? uniqueKeyList
-    : buttonList.map((button, index) => button + '_' + index);
+    : buttonList.map((button, index) => button + "_" + index);
 
   useEffect(() => {
     setCurrentMultipleChoiceState(currentButtonList ? currentButtonList : []);
@@ -56,7 +62,7 @@ const ButtonGroup: React.FC<buttonGroupProps> = ({
     // console.log('currentMultipleChoiceState', currentMultipleChoiceState);
   }, [currentMultipleChoiceState]);
   const onClickHandler = (e) => {
-    if (e.target.tagName !== 'BUTTON') {
+    if (e.target.tagName !== "BUTTON") {
       return;
     }
     if (!multipleChoice) {
@@ -67,7 +73,10 @@ const ButtonGroup: React.FC<buttonGroupProps> = ({
         currentMultipleChoiceState.splice(index, 1);
         setCurrentMultipleChoiceState([...currentMultipleChoiceState]);
       } else {
-        setCurrentMultipleChoiceState([...currentMultipleChoiceState, e.target.name]);
+        setCurrentMultipleChoiceState([
+          ...currentMultipleChoiceState,
+          e.target.name,
+        ]);
       }
     }
   };
@@ -89,8 +98,14 @@ const ButtonGroup: React.FC<buttonGroupProps> = ({
             currentTextFlag={currentTextFlag}
             checkIcon={checkIcon}
             clickHandler={clickHandler}
-            currentFlag={currentMultipleChoiceState.includes(nameList[index]) ? true : false}
-            disabled={disabledButtonList && disabledButtonList[index] ? true : false}
+            currentFlag={
+              currentMultipleChoiceState.includes(nameList[index])
+                ? true
+                : false
+            }
+            disabled={
+              disabledButtonList && disabledButtonList[index] ? true : false
+            }
             backgroundColor={backgroundColorList && backgroundColorList[index]}
             hoverColor={hoverColorList && hoverColorList[index]}
             selectFlag={selectFlag}
@@ -100,7 +115,7 @@ const ButtonGroup: React.FC<buttonGroupProps> = ({
     </>
   );
 };
-const ButtonGroupWrapper = styled.div`
+const ButtonGroupWrapper = styled.div<ButtonGroupWrapperProps>`
   display: flex;
   width: 100%;
   gap: 0.5em;

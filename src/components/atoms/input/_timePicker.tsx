@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 interface TimePickerProps {
   color?: string;
@@ -9,15 +9,21 @@ interface TimePickerProps {
   hFlag?: boolean;
 }
 
-const _timePicker: React.FC<TimePickerProps> = ({ color, name, onTimeChange, value, hFlag }) => {
+const _timePicker: React.FC<TimePickerProps> = ({
+  color,
+  name,
+  onTimeChange,
+  value,
+  hFlag,
+}) => {
   const [hour, setHour] = useState<any>(-1);
   const [minute, setMinute] = useState<any>(-1);
 
   useEffect(() => {
     if (value) {
       const time = value
-        .split('_')[1]
-        .split(':')
+        .split("_")[1]
+        .split(":")
         .map((e) => Number(e));
       setHour(time[0]);
       if (Number.isNaN(time[1])) {
@@ -38,7 +44,7 @@ const _timePicker: React.FC<TimePickerProps> = ({ color, name, onTimeChange, val
     for (let i = start; i <= end; i += step) {
       options.push(
         <option key={i} value={i}>
-          {i < 10 ? '0' + i : i}
+          {i < 10 ? "0" + i : i}
         </option>
       );
     }
@@ -71,7 +77,11 @@ const _timePicker: React.FC<TimePickerProps> = ({ color, name, onTimeChange, val
         >
           {createOptions(0, 23)}
         </SelectWrapper>
-        {hFlag ? <TimeSeparator>시간</TimeSeparator> : <TimeSeparator>시</TimeSeparator>}
+        {hFlag ? (
+          <TimeSeparator>시간</TimeSeparator>
+        ) : (
+          <TimeSeparator>시</TimeSeparator>
+        )}
         <SelectWrapper
           color={color}
           value={minute}
@@ -85,7 +95,7 @@ const _timePicker: React.FC<TimePickerProps> = ({ color, name, onTimeChange, val
   );
 };
 
-const CenterWrapper = styled.div`
+const CenterWrapper = styled.div<{ name?: string }>`
   justify-content: center;
   display: flex;
 `;
@@ -102,7 +112,7 @@ const TimePickerWrapper = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: ${({ color }) => color + 26 || '#95959526'};
+  background-color: ${({ color }) => color + 26 || "#95959526"};
   border-radius: 10px;
   padding-left: 33px;
   padding-right: 38px;
@@ -110,9 +120,9 @@ const TimePickerWrapper = styled.div`
 const SelectWrapper = styled.select<{ color?: string }>`
   font-size: 23px;
   font-weight: 400;
-  border: 0px solid ${({ color }) => color + 26 || '#95959526'};
+  border: 0px solid ${({ color }) => color + 26 || "#95959526"};
   background-color: #ffffff00;
-  color: ${({ color }) => color || '#black'};
+  color: ${({ color }) => color || "#black"};
   border-radius: 4px;
   appearance: none;
   height: 100%;

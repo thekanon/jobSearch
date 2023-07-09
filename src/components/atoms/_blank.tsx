@@ -1,13 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const _blank = styled.div`
-  height: ${({ height }) => `${height}px`};
-  background-color: ${({ color }) => color};
+interface _blankProps {
+  height?: number;
+  color?: string;
+}
+
+const _blank = styled.div<_blankProps>`
+  height: ${({ height = 20 }) => `${height}px`};
+  background-color: ${({ color = "" }) => color};
 `;
-
-_blank.defaultProps = {
-  height: 20,
-  color: ''
-};
 
 export default _blank;
