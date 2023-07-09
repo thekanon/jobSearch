@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
+import useDebounce from "@/hooks/useDebounce";
+
 import Input from "../atoms/Input";
 import { IStyleProps } from "@/types/components/defaultProps";
 
@@ -22,50 +25,61 @@ const AutoComplete = ({
   textArray = [],
   onChange,
   onSelectedValue,
-  maxListLength = 99,
+  maxListLength = 999,
   addStyle = "",
 }: IAutoCompleteProps) => {
+  const [searchTerm, setSearchTerm] = useState(value);
   const [selectedValue, setSelectedValue] = useState("");
+  const [filterList, setFilterList] = useState<string[]>([]);
+  const debouncedSearchTerm = useDebounce(searchTerm, 200);
+
   const filter = (text: string) => {
     // 빈값이면 랜덤으로 추천
     const randomStart = Math.floor(
       Math.random() * Math.max(0, textArray.length - maxListLength)
     );
-    if (text === "")
-      return textArray.slice(randomStart, randomStart + maxListLength);
     const result = textArray.filter((item) => item.includes(text));
-    if (selectedValue === result[0]) return [];
+    if (text === "" || selectedValue === result[0])
+      return textArray.slice(randomStart, randomStart + maxListLength);
+
     if (result.length > maxListLength) return result.slice(0, maxListLength);
     return result;
   };
+
   useEffect(() => {
-    console.log(placeholder);
-  }, [placeholder]);
+    setFilterList(filter(value));
+  }, [value, textArray]);
+
+  useEffect(() => {
+    setFilterList(filter(debouncedSearchTerm));
+  }, [debouncedSearchTerm]);
 
   useEffect(() => {
     if (onSelectedValue) onSelectedValue(selectedValue);
   }, [selectedValue]);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <AutoCompleteWrapper>
       <Input
-        value={value}
-        onChange={onChange}
+        value={searchTerm}
+        onChange={handleChange}
         props={{
           type: "text",
           placeholder: placeholder,
         }}
       />
-      {filter(value).length !== 0 && (
+      {filterList.length !== 0 && (
         <AutoCompleteList addStyle={addStyle}>
-          {filter(value).map((item) => (
+          {filterList.map((item) => (
             <div
               className={selectedValue === item ? "active" : ""}
               onClick={() => {
                 setSelectedValue(item);
-                onChange({
-                  target: { value: item },
-                } as React.ChangeEvent<HTMLInputElement>);
+                setSearchTerm("");
               }}
               key={item || Math.random()}
             >
