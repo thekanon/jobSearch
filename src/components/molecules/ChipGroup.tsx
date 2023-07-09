@@ -3,7 +3,7 @@ import styled, { useTheme } from "styled-components";
 import Chip from "../atoms/Chip";
 import { IStyleProps } from "@/types/components/defaultProps";
 
-interface IChipGroupProps {
+export interface IChipGroupProps {
   textArray: string[];
   onSelectedValue: (value: string) => void;
   addStyle?: string;
