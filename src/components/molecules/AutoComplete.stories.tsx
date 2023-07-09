@@ -1,5 +1,6 @@
 import type { Meta, Story } from "@storybook/react";
 import AutoComplete from "./AutoComplete";
+import { useState } from "react";
 
 interface IAutoCompleteProps {
   value: string;
@@ -65,28 +66,31 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<IAutoCompleteProps> = (args) => (
-  <AutoComplete {...args} />
-);
+const Template: Story<IAutoCompleteProps> = (args) => {
+  const [value, setValue] = useState(args.value);
 
-let value = "";
-let value2;
+  return (
+    <AutoComplete
+      {...args}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+  );
+};
 
 export const DefaultAutoComplete = Template.bind({});
 DefaultAutoComplete.args = {
-  value: value,
+  value: "",
   placeholder: "Search...",
   textArray: ["Apple", "Banana", "Cherry", "Date", "Elderberry"],
-  onChange: (e) => (value = e.target.value),
   maxListLength: 5,
 };
 
 export const CustomStyleAutoComplete = Template.bind({});
 CustomStyleAutoComplete.args = {
-  value: value2,
+  value: "",
   placeholder: "Search...",
   textArray: ["Apple", "Banana", "Cherry", "Date", "Elderberry"],
-  onChange: (e) => (value = e.target.value),
   maxListLength: 5,
   addStyle: `margin: 15px,
   border: 1px solid gray",
