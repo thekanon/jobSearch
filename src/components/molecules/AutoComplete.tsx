@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import styled from "styled-components";
 
 import useDebounce from "@/hooks/useDebounce";
@@ -14,9 +14,27 @@ interface IAutoCompleteProps {
   maxListLength?: number;
   addStyle?: string;
 }
+
 interface IAutoCompleteListProps {
   addStyle?: string;
 }
+interface ListElementProps {
+  item: string;
+  active: boolean;
+  onClick: () => void;
+}
+
+const ListElement = React.memo(
+  ({ item, active, onClick }: ListElementProps) => {
+    return (
+      <div className={active ? "active" : ""} onClick={onClick}>
+        {item}
+      </div>
+    );
+  },
+  (prevProps, nextProps) =>
+    prevProps.item === nextProps.item && prevProps.active === nextProps.active
+);
 
 const AutoComplete = ({
   placeholder,
@@ -24,12 +42,11 @@ const AutoComplete = ({
   textArray = [],
   onChange,
   onSelectedValue,
-  maxListLength = 999,
+  maxListLength = 20,
   addStyle = "",
 }: IAutoCompleteProps) => {
   const [searchTerm, setSearchTerm] = useState(value);
   const [selectedValue, setSelectedValue] = useState("");
-  const [filterList, setFilterList] = useState<string[]>([]);
   const debouncedSearchTerm = useDebounce(searchTerm, 200);
 
   const selectItem = useCallback((item) => {
@@ -37,8 +54,8 @@ const AutoComplete = ({
     setSearchTerm("");
   }, []);
 
-  const filter = (text: string) => {
-    const lowerCaseText = text.toLowerCase();
+  const filter = useMemo(() => {
+    const lowerCaseText = debouncedSearchTerm.toLowerCase();
 
     const randomStart = Math.floor(
       Math.random() * Math.max(0, textArray.length - maxListLength)
@@ -48,20 +65,12 @@ const AutoComplete = ({
       item.toLowerCase().includes(lowerCaseText)
     );
 
-    if (text === "" || selectedValue === result[0])
+    if (debouncedSearchTerm === "" || selectedValue === result[0])
       return textArray.slice(randomStart, randomStart + maxListLength);
 
     if (result.length > maxListLength) return result.slice(0, maxListLength);
     return result;
-  };
-
-  useEffect(() => {
-    setFilterList(filter(value));
-  }, [value, textArray]);
-
-  useEffect(() => {
-    setFilterList(filter(debouncedSearchTerm));
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, textArray, selectedValue]);
 
   useEffect(() => {
     if (onSelectedValue) onSelectedValue(selectedValue);
@@ -81,16 +90,15 @@ const AutoComplete = ({
           placeholder: placeholder,
         }}
       />
-      {filterList.length !== 0 && (
+      {filter.length !== 0 && (
         <AutoCompleteList addStyle={addStyle}>
-          {filterList.map((item, index) => (
-            <div
-              className={selectedValue === item ? "active" : ""}
-              onClick={() => selectItem(item)}
+          {filter.map((item, index) => (
+            <ListElement
               key={index}
-            >
-              {item}
-            </div>
+              item={item}
+              active={selectedValue === item}
+              onClick={() => selectItem(item)}
+            />
           ))}
         </AutoCompleteList>
       )}
@@ -103,7 +111,7 @@ const AutoCompleteList = styled.div<IAutoCompleteListProps>`
   margin: 10px 0 0 0;
   padding: 10px;
   border: none;
-  max-height: 350px;
+  max-height: 250px;
   overflow: auto;
   div {
     padding: 10px;
