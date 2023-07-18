@@ -92,9 +92,9 @@ const AutoComplete = ({
       />
       {filter.length !== 0 && (
         <AutoCompleteList addStyle={addStyle}>
-          {filter.map((item, index) => (
+          {filter.map((item) => (
             <ListElement
-              key={index}
+              key={item}
               item={item}
               active={selectedValue === item}
               onClick={() => selectItem(item)}
