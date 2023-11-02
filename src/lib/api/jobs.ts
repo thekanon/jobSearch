@@ -7,7 +7,7 @@ export async function fetchJob(jobId: string) {
     const response = await axios.get(`${BASE_URL}/api/jobs/${jobId}`);
     return response.data;
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     return null; // 에러 발생 시 null 반환
   }
 }

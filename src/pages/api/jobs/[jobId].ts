@@ -6,11 +6,17 @@ import fs from "fs/promises";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const jobId = req.query.jobId as string;
 
+  console.log("test");
+
   // JSON 파일의 경로를 생성합니다.
   const filePath = path.join(
-    process.cwd(),
-    "src",
-    "lib",
+    __dirname,
+    "..",
+    "..",
+    "..",
+    "..",
+    "..",
+    "public",
     "data",
     "jobsQuestion",
     `${jobId}.json`
@@ -22,6 +28,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     // JSON을 파싱합니다.
     const jobData = JSON.parse(fileContents);
+
+    console.log(fileContents);
 
     // 응답으로 JSON 데이터를 보냅니다.
     res.status(200).json(jobData);
