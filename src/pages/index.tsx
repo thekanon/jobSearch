@@ -10,21 +10,49 @@ import {
   selectCategoryKey,
 } from "@/store/reducers/categories";
 import { addItem, removeItem } from "@/store/reducers/selectChip";
-import { ThemeContext } from "../contexts/ThemeContext";
 import AutoComplete from "@/components/molecules/AutoComplete";
 import { categoryObj } from "@/lib/categories";
 import ChipGroup from "@/components/molecules/ChipGroup";
+import DataList from "@/components/molecules/DataList";
+import jobsData from "@/lib/data/jobsQuestion";
+import { useRouter } from "next/router";
+
+type JobListItem = {
+  name: string;
+  handleClick: () => void;
+};
+
 const HomePage = () => {
   const dispatch = useDispatch();
+  const router = useRouter(); // Use the useRouter hook
+
   const category = useSelector(selectCategory);
   const categories = useSelector((state: any) => state.categories.categoryObj);
   const categoryKey = useSelector(selectCategoryKey);
 
+  const SEARCH_RESULTS_TITLE = "검색 결과";
+
   useEffect(() => {
     dispatch(setCategories(categoryObj));
-  }, []);
+
+    const jobs = jobsData;
+    console.log("jobs", jobs);
+    // Assuming jobsData is an object with keys that map to job objects with a name and id
+    const jobList = Object.values(jobs).map((job) => ({
+      name: job.name,
+      handleClick: () => {
+        console.log(`${job.name} clicked!`, job.id); // This will log the job's name and id when clicked
+        router.push(`/jobs/${job.id}`); // Navigate using router.push
+      },
+    }));
+
+    setListItems(jobList);
+  }, [dispatch]);
+
   const [value, setValue] = React.useState("");
   const [selectedValue, setSelectedValue] = React.useState("");
+  const [listItems, setListItems] = React.useState<JobListItem[]>([]);
+
   const chipList = useSelector((state: any) => state.selectChip);
   const categoryExists = useSelector(selectCategoryExists(value));
 
@@ -72,35 +100,64 @@ const HomePage = () => {
   };
 
   return (
-    <MainContainer>
-      <ChipGroup
-        textArray={chipList}
-        onSelectedValue={onClickChip}
-        addStyle={`
+    <div>
+      <MainContainer>
+        <ChipGroup
+          textArray={chipList}
+          onSelectedValue={onClickChip}
+          addStyle={`
         margin-bottom: 20px;
       `}
-      />
-      <AutoComplete
-        value={value}
-        onChange={onChange}
-        onSelectedValue={onSelectedValue}
-        placeholder={getPlaceholder()}
-        textArray={category !== undefined ? category : []}
-        addStyle={`
+        />
+        <AutoComplete
+          value={value}
+          onChange={onChange}
+          onSelectedValue={onSelectedValue}
+          placeholder={getPlaceholder()}
+          textArray={category !== undefined ? category : []}
+          addStyle={`
           border: 1px solid gray;
         `}
-      />
-    </MainContainer>
+        />
+      </MainContainer>
+      <SubContainer>
+        <Title>
+          {SEARCH_RESULTS_TITLE} ({listItems.length + "개"})
+        </Title>
+        <ResultsContainer>
+          <DataList listItems={listItems} />
+        </ResultsContainer>
+      </SubContainer>
+    </div>
   );
 };
 const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
   flex-direction: column;
   background-color: ${({ theme }) => theme.body};
   color: ${({ theme }) => theme.text};
+`;
+const SubContainer = styled.div`
+  background-color: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
+  padding: 30px;
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+const ResultsContainer = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30px;
+
+  border: 1px solid gray;
 `;
 
 export default HomePage;

@@ -3,9 +3,13 @@ import frontendDeveloper from "./frontendDeveloper.json";
 import performanceMarketers from "./performanceMarketers.json";
 import visualDesigner from "./visualDesigner.json";
 
-export default {
+const jobsQuestion = {
   backendDeveloper,
   frontendDeveloper,
   performanceMarketers,
   visualDesigner,
+};
+
+export default {
+  ...jobsQuestion,
 };

@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   console.log("jobId", jobId);
 
-  const jobData = jobsData[jobId];
+  const jobData = jobsData[jobId as string];
 
   if (!jobData) {
     return res.status(404).json({ message: "Job not found" });

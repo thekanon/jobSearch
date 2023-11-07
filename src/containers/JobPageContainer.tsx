@@ -26,8 +26,8 @@ const JobPageContainer = ({
   const [nonTechnicalCount, setNonTechnicalCount] = useState(2);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 3000);
-  }, []);
+    id && setLoading(false);
+  }, [id]);
 
   const appendQuestions = (type) => {
     type === "technical"

@@ -29,7 +29,7 @@ const JobPageComponent = ({
           description={`${name}의 면접의 특징, 기술 면접 질문, 비기술 면접 질문과 각 질문의 의도, 답변 예시까지 알아보세요!`}
           keywords={`${name}, ${name} 면접, ${name} 기술 면접, ${name} 비기술 면접, ${name} 질문, ${name} 면접 답변, ${name} 질문 의도, ${name} 답변 예시`}
         />
-        <h1>{`${name}에 대하여 준비한 정보에요`}</h1>
+        <h1>{`${name}에 대하여 준비한 정보예요`}</h1>
         <h2>{name} 면접의 질문 특징!</h2>
         <FeatureList features={generalFeatures} />
         <h2>{name} 기술 면접 질문 / 답변!</h2>

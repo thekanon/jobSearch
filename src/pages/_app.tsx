@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useEffect } from "react";
 import "@/styles/globals.css";
 import { IDefaultComponentProps } from "@/types/components/defaultProps";
 import { ThemeContextProvider } from "@/contexts/ThemeContext";
