@@ -66,6 +66,9 @@ const Container = styled.div`
   border-radius: 5px;
   line-height: 1.5; // 일반 텍스트의 라인 간격 설정
 
+  background-color: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
+
   p {
     word-break: keep-all;
     margin: 35px 5px;

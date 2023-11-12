@@ -15,13 +15,13 @@ const FeatureList: React.FC<FeatureListProps> = ({ features, className }) => (
 );
 
 const StyledFeatureList = styled.div`
-  background-color: #2f2f2f;
+  background-color: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
   margin-top: 20px;
   padding: 5px;
   border-radius: 5px;
 
   p {
-    color: #fff;
     margin: 15px 5px;
     word-break: keep-all;
   }

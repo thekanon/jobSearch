@@ -27,7 +27,8 @@ const StyledQuestionList = styled.div`
   margin-top: 20px;
   padding: 20px;
   border-radius: 5px;
-  background-color: #2f2f2f;
+  background-color: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
   margin-bottom: 20px;
 `;
 
@@ -51,7 +52,7 @@ const QuestionItem = styled.div`
   button {
     background: none;
     border: none;
-    color: #8f83ff;
+
     cursor: pointer;
     font-size: 0.875rem;
     padding: 0;

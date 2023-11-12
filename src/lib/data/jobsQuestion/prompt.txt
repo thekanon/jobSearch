@@ -1,0 +1,7 @@
+최소 150자의 이전 답변과 중복되지 않는 technicalQuestions와 6개 만들어줘
+최소 150자의 이전 답변과 중복되지 않는 nonTechnicalQuestions을 6개 만들어줘
+
+위 json데이터의 구조와 동일하고 아래 조건에 맞는 사회체육학과 면접 질문 json을 만들어줘
+1. 데이터는 technicalQuestions와 nonTechnicalQuestions는 각각 2개씩 만들어줘
+2. exampleAnswer는 150자 이상으로 만들어줘
+3. json 형태로 만들어줘.

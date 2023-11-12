@@ -49,10 +49,10 @@ const List = styled.ul`
 const ListItem = styled.li`
   padding: 15px 20px;
   border-bottom: 1px solid #e1e1e1;
-  background-color: #333;
+  background-color: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
   text-align: left;
   font-size: 16px;
-  color: #f8f8f8;
 
   &:last-child {
     border-bottom: none;

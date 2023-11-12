@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from "react";
+import React from "react";
 import "@/styles/globals.css";
 import { IDefaultComponentProps } from "@/types/components/defaultProps";
 import { ThemeContextProvider } from "@/contexts/ThemeContext";
@@ -9,7 +9,7 @@ import Head from "next/head";
 function MyApp({ Component, pageProps }: IDefaultComponentProps) {
   return (
     <Provider store={store}>
-      <ThemeContextProvider themeMode={"dark"}>
+      <ThemeContextProvider themeMode={"light"}>
         <Head>
           <meta charSet="UTF-8" />
           <meta
