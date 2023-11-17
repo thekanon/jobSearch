@@ -149,6 +149,7 @@ const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
 function extractUrls(xmlStr) {
   const parser = new DOMParser();
   const xmlDoc = parser.parseFromString(xmlStr, "text/xml");
+  console.log(xmlDoc);
   const urlElements = xmlDoc.getElementsByTagName("loc");
   let urls = [];
 

@@ -45,6 +45,13 @@ const QuestionItem = styled.div`
   .button-wrapper {
     display: flex;
     justify-content: center;
+
+
+    @media (prefers-color-scheme: dark) {
+        button {
+          color: black;
+        }
+    }
   }
   &.expanded .details {
     display: block;
