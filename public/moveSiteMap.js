@@ -1,5 +1,6 @@
 // XML string
-const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
+const xmlString = `
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -143,7 +144,8 @@ const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
 </loc>
     <lastmod>2023-11-12T15:28:11+00:00</lastmod>
   </url>
-</urlset>`;
+</urlset>
+`;
 
 // Function to parse XML and extract URLs
 function extractUrls(xmlStr) {
