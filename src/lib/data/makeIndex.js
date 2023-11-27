@@ -15,9 +15,7 @@ fs.readdir(directoryPath, function (err, files) {
   files.forEach(function (file) {
     if (path.extname(file) === ".json") {
       const baseName = path.basename(file, ".json");
-      const importName =
-        baseName.charAt(0).toLowerCase() +
-        baseName.slice(1).replace(/Interview/g, "");
+      const importName = baseName;
 
       imports += `import ${importName} from "./${file}";\n`;
       exports += `  ${importName},\n`;

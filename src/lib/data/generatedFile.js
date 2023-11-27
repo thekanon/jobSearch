@@ -1,56 +1,56 @@
 import backendDeveloper from "./backendDeveloper.json";
-import biomedicalEngineering from "./biomedicalEngineeringInterview.json";
-import businessAdministration from "./businessAdministrationInterview.json";
-import chemicalEngineering from "./chemicalEngineeringInterview.json";
-import computerScience from "./computerScienceInterview.json";
-import creativeWriting from "./creativeWritingInterview.json";
-import dentalHygiene from "./dentalHygieneInterview.json";
-import economics from "./economicsInterview.json";
-import englishEducation from "./englishEducationInterview.json";
+import biomedicalEngineeringInterview from "./biomedicalEngineeringInterview.json";
+import businessAdministrationInterview from "./businessAdministrationInterview.json";
+import chemicalEngineeringInterview from "./chemicalEngineeringInterview.json";
+import computerScienceInterview from "./computerScienceInterview.json";
+import creativeWritingInterview from "./creativeWritingInterview.json";
+import dentalHygieneInterview from "./dentalHygieneInterview.json";
+import economicsInterview from "./economicsInterview.json";
+import englishEducationInterview from "./englishEducationInterview.json";
 import frontendDeveloper from "./frontendDeveloper.json";
-import healthcareAdministration from "./healthcareAdministrationInterview.json";
-import industrialEngineering from "./industrialEngineeringInterview.json";
-import koreanLanguageEducation from "./koreanLanguageEducationInterview.json";
-import lifeScience from "./lifeScienceInterview.json";
-import mathEducation from "./mathEducationInterview.json";
-import nursing from "./nursingInterview.json";
-import occupationalTherapy from "./occupationalTherapyInterview.json";
+import healthcareAdministrationInterview from "./healthcareAdministrationInterview.json";
+import industrialEngineeringInterview from "./industrialEngineeringInterview.json";
+import koreanLanguageEducationInterview from "./koreanLanguageEducationInterview.json";
+import lifeScienceInterview from "./lifeScienceInterview.json";
+import mathEducationInterview from "./mathEducationInterview.json";
+import nursingInterview from "./nursingInterview.json";
+import occupationalTherapyInterview from "./occupationalTherapyInterview.json";
 import performanceMarketers from "./performanceMarketers.json";
-import physicalTherapy from "./physicalTherapyInterview.json";
-import psychology from "./psychologyInterview.json";
-import socialWork from "./socialWorkInterview.json";
+import physicalTherapyInterview from "./physicalTherapyInterview.json";
+import psychologyInterview from "./psychologyInterview.json";
+import socialWorkInterview from "./socialWorkInterview.json";
 import softwareDeveloper from "./softwareDeveloper.json";
-import sportsScience from "./sportsScienceInterview.json";
+import sportsScienceInterview from "./sportsScienceInterview.json";
 import theatreAndFilmStudies from "./theatreAndFilmStudies.json";
-import tourismManagement from "./tourismManagementInterview.json";
+import tourismManagementInterview from "./tourismManagementInterview.json";
 import visualDesigner from "./visualDesigner.json";
 
 const jobsQuestion = {
   backendDeveloper,
-  biomedicalEngineering,
-  businessAdministration,
-  chemicalEngineering,
-  computerScience,
-  creativeWriting,
-  dentalHygiene,
-  economics,
-  englishEducation,
+  biomedicalEngineeringInterview,
+  businessAdministrationInterview,
+  chemicalEngineeringInterview,
+  computerScienceInterview,
+  creativeWritingInterview,
+  dentalHygieneInterview,
+  economicsInterview,
+  englishEducationInterview,
   frontendDeveloper,
-  healthcareAdministration,
-  industrialEngineering,
-  koreanLanguageEducation,
-  lifeScience,
-  mathEducation,
-  nursing,
-  occupationalTherapy,
+  healthcareAdministrationInterview,
+  industrialEngineeringInterview,
+  koreanLanguageEducationInterview,
+  lifeScienceInterview,
+  mathEducationInterview,
+  nursingInterview,
+  occupationalTherapyInterview,
   performanceMarketers,
-  physicalTherapy,
-  psychology,
-  socialWork,
+  physicalTherapyInterview,
+  psychologyInterview,
+  socialWorkInterview,
   softwareDeveloper,
-  sportsScience,
+  sportsScienceInterview,
   theatreAndFilmStudies,
-  tourismManagement,
+  tourismManagementInterview,
   visualDesigner,
 };
 
