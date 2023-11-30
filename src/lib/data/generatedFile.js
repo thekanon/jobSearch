@@ -1,3 +1,5 @@
+import aiDepartmentInterview from "./aiDepartmentInterview.json";
+import appliedMathematicsInterview from "./appliedMathematicsInterview.json";
 import backendDeveloper from "./backendDeveloper.json";
 import biomedicalEngineeringInterview from "./biomedicalEngineeringInterview.json";
 import businessAdministrationInterview from "./businessAdministrationInterview.json";
@@ -7,9 +9,11 @@ import creativeWritingInterview from "./creativeWritingInterview.json";
 import dentalHygieneInterview from "./dentalHygieneInterview.json";
 import economicsInterview from "./economicsInterview.json";
 import englishEducationInterview from "./englishEducationInterview.json";
+import foodAndBiotechnologyInterview from "./foodAndBiotechnologyInterview.json";
 import frontendDeveloper from "./frontendDeveloper.json";
 import healthcareAdministrationInterview from "./healthcareAdministrationInterview.json";
 import industrialEngineeringInterview from "./industrialEngineeringInterview.json";
+import internationalStudiesInterview from "./internationalStudiesInterview.json";
 import koreanLanguageEducationInterview from "./koreanLanguageEducationInterview.json";
 import lifeScienceInterview from "./lifeScienceInterview.json";
 import mathEducationInterview from "./mathEducationInterview.json";
@@ -19,13 +23,17 @@ import performanceMarketers from "./performanceMarketers.json";
 import physicalTherapyInterview from "./physicalTherapyInterview.json";
 import psychologyInterview from "./psychologyInterview.json";
 import socialWorkInterview from "./socialWorkInterview.json";
+import softwareConvergenceInterview from "./softwareConvergenceInterview.json";
 import softwareDeveloper from "./softwareDeveloper.json";
+import softwareEngineeringInterview from "./softwareEngineeringInterview.json";
 import sportsScienceInterview from "./sportsScienceInterview.json";
 import theatreAndFilmStudies from "./theatreAndFilmStudies.json";
 import tourismManagementInterview from "./tourismManagementInterview.json";
 import visualDesigner from "./visualDesigner.json";
 
 const jobsQuestion = {
+  aiDepartmentInterview,
+  appliedMathematicsInterview,
   backendDeveloper,
   biomedicalEngineeringInterview,
   businessAdministrationInterview,
@@ -35,9 +43,11 @@ const jobsQuestion = {
   dentalHygieneInterview,
   economicsInterview,
   englishEducationInterview,
+  foodAndBiotechnologyInterview,
   frontendDeveloper,
   healthcareAdministrationInterview,
   industrialEngineeringInterview,
+  internationalStudiesInterview,
   koreanLanguageEducationInterview,
   lifeScienceInterview,
   mathEducationInterview,
@@ -47,7 +57,9 @@ const jobsQuestion = {
   physicalTherapyInterview,
   psychologyInterview,
   socialWorkInterview,
+  softwareConvergenceInterview,
   softwareDeveloper,
+  softwareEngineeringInterview,
   sportsScienceInterview,
   theatreAndFilmStudies,
   tourismManagementInterview,
