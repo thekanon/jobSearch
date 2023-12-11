@@ -47,6 +47,7 @@
     "eslint-config-next": "13.3.4",
     "eslint-plugin-storybook": "^0.6.11",
     "eslint-plugin-styled-components-a11y": "^2.1.0",
-    "storybook": "^7.0.7"
+    "storybook": "^7.0.7",
+    "vercel": "^32.6.1"
   }
 }
