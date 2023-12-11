@@ -4,10 +4,12 @@ import backendDeveloper from "./backendDeveloper.json";
 import biomedicalEngineeringInterview from "./biomedicalEngineeringInterview.json";
 import businessAdministrationInterview from "./businessAdministrationInterview.json";
 import chemicalEngineeringInterview from "./chemicalEngineeringInterview.json";
+import civilEngineeringInterview from "./civilEngineeringInterview.json";
 import computerScienceInterview from "./computerScienceInterview.json";
 import creativeWritingInterview from "./creativeWritingInterview.json";
 import dentalHygieneInterview from "./dentalHygieneInterview.json";
 import economicsInterview from "./economicsInterview.json";
+import electronicEngineeringInterview from "./electronicEngineeringInterview.json";
 import englishEducationInterview from "./englishEducationInterview.json";
 import foodAndBiotechnologyInterview from "./foodAndBiotechnologyInterview.json";
 import frontendDeveloper from "./frontendDeveloper.json";
@@ -38,10 +40,12 @@ const jobsQuestion = {
   biomedicalEngineeringInterview,
   businessAdministrationInterview,
   chemicalEngineeringInterview,
+  civilEngineeringInterview,
   computerScienceInterview,
   creativeWritingInterview,
   dentalHygieneInterview,
   economicsInterview,
+  electronicEngineeringInterview,
   englishEducationInterview,
   foodAndBiotechnologyInterview,
   frontendDeveloper,
