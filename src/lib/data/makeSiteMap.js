@@ -35,8 +35,9 @@ fs.readdir(directoryPath, function (err, files) {
   });
 
   sitemap += "</urlset>";
+  const sitemapPath = path.join(__dirname, "../../../public/sitemap.xml");
 
-  fs.writeFile("sitemap.xml", sitemap, function (err) {
+  fs.writeFile(sitemapPath, sitemap, function (err) {
     if (err) throw err;
     console.log("Sitemap generated!");
   });

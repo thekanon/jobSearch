@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const directoryPath = path.join(__dirname, "./jobsQuestion");
-const outputPath = path.join(__dirname, "./generatedFile.js");
+const outputPath = path.join(__dirname, "./jobsQuestion/index.js");
 
 fs.readdir(directoryPath, function (err, files) {
   if (err) {

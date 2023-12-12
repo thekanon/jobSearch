@@ -2,6 +2,7 @@ import aiDepartmentInterview from "./aiDepartmentInterview.json";
 import appliedMathematicsInterview from "./appliedMathematicsInterview.json";
 import backendDeveloper from "./backendDeveloper.json";
 import biomedicalEngineeringInterview from "./biomedicalEngineeringInterview.json";
+import brandMarketer from "./brandMarketer.json";
 import businessAdministrationInterview from "./businessAdministrationInterview.json";
 import chemicalEngineeringInterview from "./chemicalEngineeringInterview.json";
 import civilEngineeringInterview from "./civilEngineeringInterview.json";
@@ -14,6 +15,7 @@ import englishEducationInterview from "./englishEducationInterview.json";
 import foodAndBiotechnologyInterview from "./foodAndBiotechnologyInterview.json";
 import frontendDeveloper from "./frontendDeveloper.json";
 import healthcareAdministrationInterview from "./healthcareAdministrationInterview.json";
+import humanResources from "./humanResources.json";
 import industrialEngineeringInterview from "./industrialEngineeringInterview.json";
 import internationalStudiesInterview from "./internationalStudiesInterview.json";
 import koreanLanguageEducationInterview from "./koreanLanguageEducationInterview.json";
@@ -38,6 +40,7 @@ const jobsQuestion = {
   appliedMathematicsInterview,
   backendDeveloper,
   biomedicalEngineeringInterview,
+  brandMarketer,
   businessAdministrationInterview,
   chemicalEngineeringInterview,
   civilEngineeringInterview,
@@ -50,6 +53,7 @@ const jobsQuestion = {
   foodAndBiotechnologyInterview,
   frontendDeveloper,
   healthcareAdministrationInterview,
+  humanResources,
   industrialEngineeringInterview,
   internationalStudiesInterview,
   koreanLanguageEducationInterview,
