@@ -1,3 +1,4 @@
+import @ from "./@.json";
 import aiDepartmentInterview from "./aiDepartmentInterview.json";
 import appliedMathematicsInterview from "./appliedMathematicsInterview.json";
 import backendDeveloper from "./backendDeveloper.json";
@@ -8,6 +9,7 @@ import chemicalEngineeringInterview from "./chemicalEngineeringInterview.json";
 import civilEngineeringInterview from "./civilEngineeringInterview.json";
 import computerScienceInterview from "./computerScienceInterview.json";
 import creativeWritingInterview from "./creativeWritingInterview.json";
+import dataScientist from "./dataScientist.json";
 import dentalHygieneInterview from "./dentalHygieneInterview.json";
 import economicsInterview from "./economicsInterview.json";
 import electronicEngineeringInterview from "./electronicEngineeringInterview.json";
@@ -20,6 +22,7 @@ import industrialEngineeringInterview from "./industrialEngineeringInterview.jso
 import internationalStudiesInterview from "./internationalStudiesInterview.json";
 import koreanLanguageEducationInterview from "./koreanLanguageEducationInterview.json";
 import lifeScienceInterview from "./lifeScienceInterview.json";
+import machineLearningEngineer from "./machineLearningEngineer.json";
 import mathEducationInterview from "./mathEducationInterview.json";
 import nursingInterview from "./nursingInterview.json";
 import occupationalTherapyInterview from "./occupationalTherapyInterview.json";
@@ -36,6 +39,7 @@ import tourismManagementInterview from "./tourismManagementInterview.json";
 import visualDesigner from "./visualDesigner.json";
 
 const jobsQuestion = {
+  @,
   aiDepartmentInterview,
   appliedMathematicsInterview,
   backendDeveloper,
@@ -46,6 +50,7 @@ const jobsQuestion = {
   civilEngineeringInterview,
   computerScienceInterview,
   creativeWritingInterview,
+  dataScientist,
   dentalHygieneInterview,
   economicsInterview,
   electronicEngineeringInterview,
@@ -58,6 +63,7 @@ const jobsQuestion = {
   internationalStudiesInterview,
   koreanLanguageEducationInterview,
   lifeScienceInterview,
+  machineLearningEngineer,
   mathEducationInterview,
   nursingInterview,
   occupationalTherapyInterview,

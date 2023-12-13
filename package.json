@@ -10,7 +10,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "make-sitemap": "node ./src/lib/data/makeSiteMap.js",
-    "make-index": "node ./src/lib/data/makeIndex.js"
+    "make-index": "node ./src/lib/data/makeIndex.js",
+    "makeAll": "npm run make-sitemap && npm run make-index"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
