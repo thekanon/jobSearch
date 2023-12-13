@@ -1,4 +1,3 @@
-import @ from "./@.json";
 import aiDepartmentInterview from "./aiDepartmentInterview.json";
 import appliedMathematicsInterview from "./appliedMathematicsInterview.json";
 import backendDeveloper from "./backendDeveloper.json";
@@ -39,7 +38,6 @@ import tourismManagementInterview from "./tourismManagementInterview.json";
 import visualDesigner from "./visualDesigner.json";
 
 const jobsQuestion = {
-  @,
   aiDepartmentInterview,
   appliedMathematicsInterview,
   backendDeveloper,
