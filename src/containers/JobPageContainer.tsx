@@ -1,61 +1,45 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import JobPageComponent from "@/components/templates/JobPageComponent";
+import type { ExpandedState, QuestionType } from "@/components/molecules/QuestionList";
+import type { InterviewQuestions } from "@/lib/types/jobs";
 
-type ExpandedState = {
-  intention: boolean;
-  answer: boolean;
-};
+const collapsed = (count: number): ExpandedState[] =>
+  Array.from({ length: count }, () => ({ intention: false, answer: false }));
 
-const JobPageContainer = ({
-  id,
-  name,
-  generalFeatures,
-  technicalQuestions,
-  nonTechnicalQuestions,
-}) => {
-  const [isLoading, setLoading] = useState(true);
-
-  const [technicalExpanded, setTechnicalExpanded] = useState(
-    technicalQuestions.map(() => ({ intention: false, answer: false }))
-  );
-  const [nonTechnicalExpanded, setNonTechnicalExpanded] = useState(
-    nonTechnicalQuestions.map(() => ({ intention: false, answer: false }))
-  );
-
+const JobContent = (job: InterviewQuestions) => {
+  const { id, technicalQuestions, nonTechnicalQuestions } = job;
+  const [technicalExpanded, setTechnicalExpanded] = useState(() => collapsed(technicalQuestions.length));
+  const [nonTechnicalExpanded, setNonTechnicalExpanded] = useState(() => collapsed(nonTechnicalQuestions.length));
   const [technicalCount, setTechnicalCount] = useState(2);
   const [nonTechnicalCount, setNonTechnicalCount] = useState(2);
+  const nextFocus = useRef<string | null>(null);
 
   useEffect(() => {
-    id && setLoading(false);
-  }, [id]);
+    if (nextFocus.current) {
+      document.getElementById(nextFocus.current)?.focus();
+      nextFocus.current = null;
+    }
+  }, [technicalCount, nonTechnicalCount]);
 
-  const appendQuestions = (type) => {
-    type === "technical"
-      ? setTechnicalCount(technicalCount + 2)
-      : setNonTechnicalCount(nonTechnicalCount + 2);
+  const appendQuestions = (type: QuestionType) => {
+    const count = type === "technical" ? technicalCount : nonTechnicalCount;
+    const total = type === "technical" ? technicalQuestions.length : nonTechnicalQuestions.length;
+    if (count >= total) return;
+    nextFocus.current = `${id}-${type}-${count}-question`;
+    const setCount = type === "technical" ? setTechnicalCount : setNonTechnicalCount;
+    setCount((current) => Math.min(current + 2, total));
   };
 
-  const toggleDetails = (
-    type: "technical" | "nonTechnical",
-    index: number,
-    part: keyof ExpandedState
-  ) => {
-    const newState =
-      type === "technical" ? [...technicalExpanded] : [...nonTechnicalExpanded];
-    newState[index][part] = !newState[index][part];
-
-    type === "technical"
-      ? setTechnicalExpanded(newState)
-      : setNonTechnicalExpanded(newState);
+  const toggleDetails = (type: QuestionType, index: number, part: keyof ExpandedState) => {
+    const setExpanded = type === "technical" ? setTechnicalExpanded : setNonTechnicalExpanded;
+    setExpanded((current) => current.map((item, itemIndex) =>
+      itemIndex === index ? { ...item, [part]: !item[part] } : item
+    ));
   };
 
   return (
     <JobPageComponent
-      name={name}
-      isLoading={isLoading}
-      generalFeatures={generalFeatures}
-      technicalQuestions={technicalQuestions}
-      nonTechnicalQuestions={nonTechnicalQuestions}
+      {...job}
       technicalExpanded={technicalExpanded}
       nonTechnicalExpanded={nonTechnicalExpanded}
       technicalCount={technicalCount}
@@ -65,5 +49,8 @@ const JobPageContainer = ({
     />
   );
 };
+
+// A different job remounts all disclosure and pagination state immediately.
+const JobPageContainer = (job: InterviewQuestions) => <JobContent key={job.id} {...job} />;
 
 export default JobPageContainer;

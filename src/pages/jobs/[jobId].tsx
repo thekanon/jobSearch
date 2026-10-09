@@ -1,26 +1,26 @@
-import { GetServerSideProps } from "next";
-import { fetchJob } from "@/lib/api/jobs";
-import { InterviewQuestions } from "@/lib/types/jobs";
-
+import type { GetStaticPaths, GetStaticProps } from "next";
+import jobsData from "@/lib/data/jobsQuestion";
+import type { InterviewQuestions } from "@/lib/types/jobs";
 import JobPage from "@/containers/JobPageContainer";
 
-type JobProps = InterviewQuestions;
+const jobs: Record<string, InterviewQuestions> = jobsData;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const jobId = context.params?.jobId as string;
-  const job: JobProps = await fetchJob(jobId);
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: Object.keys(jobs).map((jobId) => ({ params: { jobId } })),
+  fallback: false,
+});
 
-  if (!job) {
-    return {
-      notFound: true,
-    };
+export const getStaticProps: GetStaticProps<InterviewQuestions> = async ({ params }) => {
+  const jobId = params?.jobId;
+  if (
+    typeof jobId !== "string" ||
+    !/^[A-Za-z][A-Za-z0-9]*$/.test(jobId) ||
+    !Object.prototype.hasOwnProperty.call(jobs, jobId)
+  ) {
+    return { notFound: true };
   }
 
-  return {
-    props: {
-      ...job,
-    },
-  };
+  return { props: jobs[jobId] };
 };
 
 export default JobPage;
